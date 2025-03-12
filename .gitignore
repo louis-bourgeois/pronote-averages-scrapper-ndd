@@ -1,0 +1,34 @@
+# Python bytecode and optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment folders
+venv/
+env/
+ENV/
+.venv/
+
+# Distribution / packaging
+*.egg-info/
+.eggs/
+
+# Flask instance folder (si vous l'utilisez pour la config locale ou la BDD)
+instance/
+*.db
+
+# Logs
+*.log
+
+# Coverage reports
+htmlcov/
+
+# IDE et éditeurs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Fichiers temporaires de l'OS
+.DS_Store
+Thumbs.db
