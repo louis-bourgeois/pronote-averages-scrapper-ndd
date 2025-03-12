@@ -1,0 +1,64 @@
+{% extends "layout.html" %} {% block title %}Dashboard - Pronote App{% endblock
+%} {% block content %}
+
+<!-- 
+  Dashboard content: displays student's averages.
+  Expected JSON data from get_averages endpoint:
+    full_name: string
+    overall: number (float)
+    tronc: number (float)
+    specialties: number (float)
+-->
+<div id="dashboard-content" style="display: block">
+  <div class="glass-card text-center">
+    <!-- Student's full name (type: string) -->
+    <h3 id="user-fullname">Patience...</h3>
+    <hr />
+    <p>Moyenne pondérée globale :</p>
+    <!-- Overall weighted average (type: float) -->
+    <h4 id="overall-average">Patience...</h4>
+    <p>Moyenne du tronc commun :</p>
+    <!-- Core subjects average (type: float) -->
+    <h4 id="tronc-average">Patience...</h4>
+    <p>Moyenne spécialités :</p>
+    <!-- Specialties average (type: float) -->
+    <h4 id="specialties-average">Patience...</h4>
+  </div>
+</div>
+
+<script>
+  // When the page is loaded, asynchronously fetch averages from the backend.
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("{{ url_for('get_averages') }}")
+      .then((response) => response.json())
+      .then((data) => {
+        // Si une erreur est renvoyée, on affiche un message à l'utilisateur
+        if (data.error) {
+          // Ici, on utilise une simple alerte ; vous pouvez adapter avec votre système de flash ou autre UI
+          alert(data.error);
+        }
+        if (data.full_name) {
+          document.getElementById("user-fullname").innerText = data.full_name;
+        }
+        if (data.overall !== null) {
+          document.getElementById("overall-average").innerText =
+            data.overall.toFixed(2);
+        }
+        if (data.tronc !== null) {
+          document.getElementById("tronc-average").innerText =
+            data.tronc.toFixed(2);
+        }
+        if (data.specialties !== null) {
+          document.getElementById("specialties-average").innerText =
+            data.specialties.toFixed(2);
+        }
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la récupération des moyennes :", error);
+      })
+      .finally(() => {
+        document.getElementById("dashboard-content").style.display = "block";
+      });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "layout.html" %} {% block title %}Connexion - Pronote App{% endblock
+%} {% block content %}
+<h2>Connexion</h2>
+<form method="POST">
+  {{ form.hidden_tag() }}
+  <div class="mb-3">
+    {{ form.pronote_username.label(class="form-label") }} {{
+    form.pronote_username(class="form-control") }} {% for error in
+    form.pronote_username.errors %}
+    <div class="text-danger">{{ error }}</div>
+    {% endfor %}
+  </div>
+  <div class="mb-3">
+    {{ form.pronote_password.label(class="form-label") }} {{
+    form.pronote_password(class="form-control") }} {% for error in
+    form.pronote_password.errors %}
+    <div class="text-danger">{{ error }}</div>
+    {% endfor %}
+  </div>
+  {{ form.submit(class="btn btn-primary") }}
+</form>
+{% endblock %}

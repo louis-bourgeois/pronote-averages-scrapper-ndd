@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 
+      Title block: Child templates can override this.
+      Default title: "Pronote App"
+    -->
+    <title>{% block title %}Pronote App{% endblock %}</title>
+    <!-- Import Bootstrap CSS for fast styling; we shall consider customizing styles for a unique design -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* 
+  Base styles for Pronote App.
+  
+  The styles include:
+  - A gradient background for the body.
+  - Custom styling for the navbar and its elements.
+  - A glass morphism style for card components.
+*/
+
+      /* Global body styling */
+      body {
+        /* Diagonal linear gradient background */
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        min-height: 100vh; /* Ensure the body covers the full viewport height */
+      }
+
+      /* Navbar styling */
+      .navbar {
+        background-color: #ffffff !important; /* Force white background */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+      }
+
+      /* Navbar brand styling */
+      .navbar-brand {
+        font-weight: 600; /* Semi-bold text */
+        color: #333333 !important; /* Dark text for contrast */
+      }
+
+      /* Styling for buttons in the navbar */
+      .navbar .btn-outline-light {
+        border-color: #333333; /* Dark border */
+        color: #333333; /* Dark text */
+      }
+
+      .navbar .btn-outline-light:hover {
+        background-color: #333333; /* Dark background on hover */
+        color: #ffffff; /* White text on hover */
+      }
+
+      /* Glass morphism card style */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+        border-radius: 16px; /* Rounded corners */
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        backdrop-filter: blur(10px); /* Background blur effect */
+        -webkit-backdrop-filter: blur(10px); /* Safari support for blur */
+        border: 1px solid rgba(255, 255, 255, 0.3); /* Light border */
+        padding: 2rem; /* Internal spacing */
+        max-width: 400px; /* Maximum width */
+        margin: 2rem auto; /* Center the card with vertical spacing */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <!-- Site name linking to the dashboard -->
+        <a class="navbar-brand" href="{{ url_for('dashboard') }}"
+          >Pronote App</a
+        >
+        <div>
+          {% if session.get('user_id') %}
+          <!-- If a user session exists, display a logout button -->
+          <a class="btn btn-outline-light" href="{{ url_for('logout') }}"
+            >Déconnexion</a
+          >
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-4">
+      <!-- 
+        Display flash messages (type: list of tuples)
+        Each message tuple: (category: string, message: string)
+      -->
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div
+        class="alert alert-{{ category }} alert-dismissible fade show"
+        role="alert"
+      >
+        {{ message }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
+      <!-- Content block: child templates will inject their content here -->
+      {% block content %}{% endblock %}
+    </div>
+    <!-- Bootstrap Bundle JavaScript (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
