@@ -1,4 +1,4 @@
-## TODO : Readme.md instructions are not complete : POSTGRESQL DB's implementation is not yet specified.
+## TODO : Readme.md instructions are not complete : POSTGRESQL database's set up is not yet specified.
 
 
 
