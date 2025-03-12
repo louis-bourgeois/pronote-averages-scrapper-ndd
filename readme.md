@@ -1,5 +1,10 @@
+## TODO : Readme.md instructions are not complete : POSTGRESQL DB's implementation is not yet specified.
 
-# Pronote Dashboard App
+
+
+# Pronote Dashboard App (version 0.0.1)
+
+
 
 Pronote Dashboard App is a Flask web application that retrieves and displays a student's averages in real time from the Pronote system. It uses Selenium to scrape information from Pronote, BeautifulSoup for data extraction, and Server-Sent Events (SSE) to dynamically update the dashboard. The interface displays the overall weighted average, the core subjects average (excluding the specialties), and the specialties average (calculated from subjects with a coefficient of 15).
 
