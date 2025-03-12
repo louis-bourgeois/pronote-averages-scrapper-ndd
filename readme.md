@@ -189,3 +189,6 @@ Le dashboard affichera immédiatement une carte avec des placeholders pour le no
 ## License
 
 Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+## Final notes
+- **Restriction**: For now, this has been drawn up for NDD students and for the French version of the Pronote site.
