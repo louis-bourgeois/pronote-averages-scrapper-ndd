@@ -76,6 +76,7 @@ def get_weighted_averages(pronote_username: str, pronote_password: str) -> Tuple
                 subject_span = subject_elem.find(
                     "span", class_="ie-titre-gros")
                 if subject_span:
+
                     subject: str = subject_span.get_text(strip=True).upper()
                     note_val: Optional[float] = None
                     note_elem = block.find("div", class_="zone-complementaire")
@@ -149,12 +150,13 @@ def get_weighted_averages(pronote_username: str, pronote_password: str) -> Tuple
         driver.execute_script("arguments[0].scrollIntoView(true);", mes_notes)
         driver.execute_script("arguments[0].click();", mes_notes)
         print("Clic sur 'Mes notes' effectué.")
-        wait.until(EC.presence_of_element_located((By.ID, "cb-g10-gen-for")))
-
+        wait.until(EC.presence_of_element_located(
+            (By.XPATH, "/html/body/div[4]/div/div[1]/div/div[5]/div[2]/label[2]/input")))
+        time.sleep(0.5)
         # Sélection du mode "Par matière"
         par_matiere_span = wait.until(EC.element_to_be_clickable(
             (By.XPATH,
-             "//label[@for='cb-g10-gen-for']/span[contains(text(),'Par matière')]")
+             "/html/body/div[4]/div/div[1]/div/div[5]/div[2]/label[2]/span[2]")
         ))
         driver.execute_script(
             "arguments[0].scrollIntoView(true);", par_matiere_span)
